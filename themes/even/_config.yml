@@ -1,0 +1,110 @@
+# ===========================================
+# Site Information Settings
+# ===========================================
+
+# Site creation time
+since: 2017
+
+# Custom your favicon.ico in `site/source`
+favicon: /favicon.ico
+
+# Set feed link (false | default | your feed link)
+# false: disable
+# default: use `atom.xml`, generator for `hexo-generator-feed`
+rss: default
+
+# ===========================================
+# Menu Settings
+# ===========================================
+menu:
+  # Home: /
+  Archives: /archives/
+  Tags: /tags
+<<<<<<< HEAD
+  Categories: /categories
+=======
+  # Categories: /categories
+  Github: https://github.com/ahonn
+>>>>>>> origin/master
+  About: /about
+
+# ===========================================
+# Theme Settings
+# ===========================================
+# theme styling
+# color: Default | Mint Green | Cobalt Blue | Hot Pink | Dark Violet
+theme:
+  color: Default
+  toc: true
+  search: false
+<<<<<<< HEAD
+  fancybox: true
+=======
+  fancybox: false
+>>>>>>> origin/master
+
+copyright:
+  enable: true
+  # https://creativecommons.org/
+  # license: '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
+
+reward:
+  enable: true
+  qrCode: 
+    wechat: /image/reward/wechat.png
+    alipay: /image/reward/alipay.png
+
+# ===========================================
+# Social links Settings
+# ===========================================
+social:
+<<<<<<< HEAD
+  email: zxshen@qq.com
+  stack-overflow: https://segmentfault.com/u/zxshen
+=======
+  email: ahonn95@outlook.com
+  stack-overflow:
+>>>>>>> origin/master
+  twitter:
+  facebook:
+  linkedin: http://www.linkedin.com/in/zxshen
+  google:
+<<<<<<< HEAD
+  github: https://github.com/zxui
+  weibo: 
+  zhihu: https://www.zhihu.com/people/zxui
+=======
+  github: https://github.com/ahonn
+  weibo:
+  zhihu: https://www.zhihu.com/people/ahonn/activities
+>>>>>>> origin/master
+  pocket:
+
+# ===========================================
+# Third Party Services Settings
+# ===========================================
+
+# Baidu Analytics
+<<<<<<< HEAD
+baidu_analytics: 97199f458716988abad8acf1a0a0dc49
+=======
+baidu_analytics: 8466adbc25665cf7ee1a15e4fcb73643
+>>>>>>> origin/master
+# Google Analytics
+google_analytics: UA-74273646-1
+
+# Duoshuo
+# duoshuo_shortname: ahonn
+# Disqus
+disqus_shortname: ahonn
+# netease
+<<<<<<< HEAD
+netease_key: f2fa1598c04f4a84933d6689c0be9af9
+=======
+# netease_key: 8c89124062934daf963154d81c305348
+>>>>>>> origin/master
+
+# ===========================================
+# Version
+# ===========================================
+version: 2.3.x
