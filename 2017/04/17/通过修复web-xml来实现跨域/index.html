@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="我的新博客上线啦"/>
+  <meta name="description" content="通过修复web.xml来实现跨域"/>
 
 
 
@@ -29,20 +29,20 @@
 
 
 
-<link rel="canonical" href="http://zxshen.win/2017/04/15/我的新博客上线啦/"/>
+<link rel="canonical" href="http://zxshen.win/2017/04/17/通过修复web-xml来实现跨域/"/>
 
 
-<meta name="description" content="欢迎来到我的博客 工欲善其事，必先利其器，成长离不开积累和历练，千里之行始于足下，如今我就开始好好的做好自己，写博客不是因为有人需要我，而是我很需要借此机会成长！">
+<meta name="description" content="实现过程 在开发项目中加入支持库,或把支持库直接丢到tomcat的lib目录下，下载地址：http://cdn.besdlab.cn/cors-lib.rar 修改web.xml，增加以下代码  12345678910111213141516171819202122232425262728&amp;lt;filter&amp;gt;        &amp;lt;filter-name&amp;gt;CORS&amp;lt;/filte">
 <meta name="keywords">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的新博客上线啦">
-<meta property="og:url" content="http://zxshen.win/2017/04/15/我的新博客上线啦/index.html">
+<meta property="og:title" content="通过修复web.xml来实现跨域">
+<meta property="og:url" content="http://zxshen.win/2017/04/17/通过修复web-xml来实现跨域/index.html">
 <meta property="og:site_name" content="ZX_UI">
-<meta property="og:description" content="欢迎来到我的博客 工欲善其事，必先利其器，成长离不开积累和历练，千里之行始于足下，如今我就开始好好的做好自己，写博客不是因为有人需要我，而是我很需要借此机会成长！">
-<meta property="og:updated_time" content="2017-04-15T14:43:07.002Z">
+<meta property="og:description" content="实现过程 在开发项目中加入支持库,或把支持库直接丢到tomcat的lib目录下，下载地址：http://cdn.besdlab.cn/cors-lib.rar 修改web.xml，增加以下代码  12345678910111213141516171819202122232425262728&amp;lt;filter&amp;gt;        &amp;lt;filter-name&amp;gt;CORS&amp;lt;/filte">
+<meta property="og:updated_time" content="2017-04-17T14:37:38.096Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的新博客上线啦">
-<meta name="twitter:description" content="欢迎来到我的博客 工欲善其事，必先利其器，成长离不开积累和历练，千里之行始于足下，如今我就开始好好的做好自己，写博客不是因为有人需要我，而是我很需要借此机会成长！">
+<meta name="twitter:title" content="通过修复web.xml来实现跨域">
+<meta name="twitter:description" content="实现过程 在开发项目中加入支持库,或把支持库直接丢到tomcat的lib目录下，下载地址：http://cdn.besdlab.cn/cors-lib.rar 修改web.xml，增加以下代码  12345678910111213141516171819202122232425262728&amp;lt;filter&amp;gt;        &amp;lt;filter-name&amp;gt;CORS&amp;lt;/filte">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.3.x" />
@@ -81,7 +81,7 @@
 
 
 
-    <title> 我的新博客上线啦 · ZX_UI </title>
+    <title> 通过修复web.xml来实现跨域 · ZX_UI </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -198,13 +198,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          我的新博客上线啦
+          通过修复web.xml来实现跨域
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2017年4月15日
+          2017年4月17日
         </span>
       </div>
     </header>
@@ -214,17 +214,18 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#欢迎来到我的博客"><span class="toc-text">欢迎来到我的博客</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现过程"><span class="toc-text">实现过程</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <h2 id="欢迎来到我的博客"><a href="#欢迎来到我的博客" class="headerlink" title="欢迎来到我的博客"></a>欢迎来到我的博客</h2><ul>
-<li>工欲善其事，必先利其器，成长离不开积累和历练，千里之行始于足下，如今我就开始好好的做好自己，写博客不是因为有人需要我，而是我很需要借此机会成长！</li>
+        <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li>在开发项目中加入支持库,或把支持库直接丢到tomcat的lib目录下，下载地址：<a href="http://cdn.besdlab.cn/cors-lib.rar" target="_blank" rel="external">http://cdn.besdlab.cn/cors-lib.rar</a></li>
+<li>修改web.xml，增加以下代码</li>
 </ul>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">        &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">        &lt;filter-class&gt;com.thetransactioncompany.cors.CORSFilter&lt;/filter-class&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.allowOrigin&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;*&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.supportedMethods&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;GET, POST, HEAD, PUT, DELETE&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.supportedHeaders&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;Accept, Origin, X-Requested-With, Content-Type, Last-Modified&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.exposedHeaders&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;Set-Cookie&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.supportsCredentials&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;filter-mapping&gt;</div><div class="line">        &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">   &lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -243,7 +244,7 @@
     </p>
     <p class="copyright-item">
       <span>链接: </span>
-      <a href="http://zxshen.win/2017/04/15/我的新博客上线啦/">http://zxshen.win/2017/04/15/我的新博客上线啦/</a>
+      <a href="http://zxshen.win/2017/04/17/通过修复web-xml来实现跨域/">http://zxshen.win/2017/04/17/通过修复web-xml来实现跨域/</a>
     </p>
 
     <p class="copyright-item lincese">
@@ -283,9 +284,15 @@
         
   <nav class="post-nav">
     
+      <a class="prev" href="/2017/04/17/通过nginx实现跨域请求/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">通过nginx实现跨域请求</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
-      <a class="next" href="/2017/04/17/通过nginx实现跨域请求/">
-        <span class="next-text nav-default">通过nginx实现跨域请求</span>
+    
+      <a class="next" href="/2017/04/17/JS创建动态脚本跨域/">
+        <span class="next-text nav-default">JS创建动态脚本跨域</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

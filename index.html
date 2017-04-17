@@ -114,20 +114,11 @@
         </li>
       </a>
     
-      <a href="/tags">
+      <a href="/works">
         <li class="mobile-menu-item">
           
           
-            Tags
-          
-        </li>
-      </a>
-    
-      <a href="/categories">
-        <li class="mobile-menu-item">
-          
-          
-            Categories
+            works
           
         </li>
       </a>
@@ -166,25 +157,16 @@
           <a class="menu-item-link" href="/archives/">
             
             
-              归档
+              博客
             
           </a>
         </li>
       
         <li class="menu-item">
-          <a class="menu-item-link" href="/tags">
+          <a class="menu-item-link" href="/works">
             
             
-              标签
-            
-          </a>
-        </li>
-      
-        <li class="menu-item">
-          <a class="menu-item-link" href="/categories">
-            
-            
-              分类
+              作品
             
           </a>
         </li>
@@ -216,6 +198,333 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/04/17/JQuery-ajax-jsonp跨域访问/">JQuery+ajax+jsonp跨域访问</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li>Jsonp(JSON with Padding)是资料格式 json 的一种“使用模式”，可以让网页从别的网域获取资料。<br>关于Jsonp更详细的资料请参考<a href="http://baike.baidu.com/view/2131174.htm，下面给出例子：" target="_blank" rel="external">http://baike.baidu.com/view/2131174.htm，下面给出例子：</a></li>
+</ul>
+<p>客户端代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</div><div class="line">&lt;title&gt;Insert title here&lt;/title&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;resource/js/jquery-1.7.2.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">$(function()&#123;</div><div class="line">    /*</div><div class="line">    //简写形式，效果相同</div><div class="line">    $.getJSON(&quot;http://app.example.com/base/json.do?sid=1494&amp;busiId=101&amp;jsonpCallback=?&quot;,</div><div class="line">            function(data)&#123;</div><div class="line">                $(&quot;#showcontent&quot;).text(&quot;Result:&quot;+data.result)</div><div class="line">    &#125;);</div><div class="line">    */</div><div class="line">    $.ajax(&#123;</div><div class="line">        type : &quot;get&quot;,</div><div class="line">        async:false,</div><div class="line">        url : &quot;http://app.example.com/base/json.do?sid=1494&amp;busiId=101&quot;,</div><div class="line">        dataType : &quot;jsonp&quot;,//数据类型为jsonp</div><div class="line">        jsonp: &quot;jsonpCallback&quot;,//服务端用于接收callback调用的function名的参数</div><div class="line">        success : function(data)&#123;</div><div class="line">            $(&quot;#showcontent&quot;).text(&quot;Result:&quot;+data.result)</div><div class="line">        &#125;,</div><div class="line">        error:function()&#123;</div><div class="line">            alert(&apos;fail&apos;);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div id=&quot;showcontent&quot;&gt;Result:&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>服务器端代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">import java.io.IOException;</div><div class="line">import java.io.PrintWriter;</div><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line">import javax.servlet.http.HttpServletRequest;</div><div class="line">import javax.servlet.http.HttpServletResponse;</div><div class="line">import net.sf.json.JSONObject;</div><div class="line">import org.springframework.stereotype.Controller;</div><div class="line">import org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"></div><div class="line">@Controller</div><div class="line">public class ExchangeJsonController &#123;</div><div class="line">    @RequestMapping(&quot;/base/json.do&quot;)</div><div class="line">    public void exchangeJson(HttpServletRequest request,HttpServletResponse response) &#123;</div><div class="line">       try &#123;</div><div class="line">        response.setContentType(&quot;text/plain&quot;);</div><div class="line">        response.setHeader(&quot;Pragma&quot;, &quot;No-cache&quot;);</div><div class="line">        response.setHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;);</div><div class="line">        response.setDateHeader(&quot;Expires&quot;, 0);</div><div class="line">        Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</div><div class="line">        map.put(&quot;result&quot;, &quot;content&quot;);</div><div class="line">        PrintWriter out = response.getWriter();</div><div class="line">        JSONObject resultJSON = JSONObject.fromObject(map); //根据需要拼装json</div><div class="line">        String jsonpCallback = request.getParameter(&quot;jsonpCallback&quot;);//客户端请求参数</div><div class="line">        out.println(jsonpCallback+&quot;(&quot;+resultJSON.toString(1,1)+&quot;)&quot;);//返回jsonp格式数据</div><div class="line">        out.flush();</div><div class="line">        out.close();</div><div class="line">      &#125; catch (IOException e) &#123;</div><div class="line">       e.printStackTrace();</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/04/17/利用iframe和location-hash/">利用iframe和location.hash</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li>这个办法比较绕，但是可以解决完全跨域情况下的脚步置换问题。原理是利用location.hash来进行传值。在url： <a href="http://a.com#helloword" target="_blank" rel="external">http://a.com#helloword</a> 中的‘#helloworld’就是location.hash，改变hash并不会导致页面刷新，所以可以利用hash值来进行数据传递，当然数据容量是有限的。假设域名a.com下的文件cs1.html要和cnblogs.com域名下的cs2.html传递信息，cs1.html首先创建自动创建一个隐藏的iframe，iframe的src指向cnblogs.com域名下的cs2.html页面，这时的hash值可以做参数传递用。cs2.html响应请求后再将通过修改cs1.html的hash值来传递数据（由于两个页面不在同一个域下IE、Chrome不允许修改parent.location.hash的值，所以要借助于a.com域名下的一个代理iframe；Firefox可以修改）。同时在cs1.html上加一个定时器，隔一段时间来判断location.hash的值有没有变化，一点有变化则获取获取hash值。</li>
+</ul>
+<p>A.com下的文件cs1.html文件代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function startRequest()&#123;</div><div class="line">    var ifr = document.createElement(&apos;iframe&apos;);</div><div class="line">    ifr.style.display = &apos;none&apos;;</div><div class="line">    ifr.src = &apos;http://www.cnblogs.com/lab/cscript/cs2.html#paramdo&apos;;</div><div class="line">    document.body.appendChild(ifr);</div><div class="line">&#125;</div><div class="line"></div><div class="line">function checkHash() &#123;</div><div class="line">    try &#123;</div><div class="line">        var data = location.hash ? location.hash.substring(1) : &apos;&apos;;</div><div class="line">        if (console.log) &#123;</div><div class="line">            console.log(&apos;Now the data is &apos;+data);</div><div class="line">        &#125;</div><div class="line">    &#125; catch(e) &#123;&#125;;</div><div class="line">&#125;</div><div class="line">setInterval(checkHash, 2000);</div></pre></td></tr></table></figure></p>
+<p>Cnblogs.com域名下的cs2.html代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">//模拟一个简单的参数处理操作</div><div class="line">switch(location.hash)&#123;</div><div class="line">    case &apos;#paramdo&apos;:</div><div class="line">        callBack();</div><div class="line">        break;</div><div class="line">    case &apos;#paramset&apos;:</div><div class="line">        //do something……</div><div class="line">        break;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function callBack()&#123;</div><div class="line">    try &#123;</div><div class="line">        parent.location.hash = &apos;somedata&apos;;</div><div class="line">    &#125; catch (e) &#123;</div><div class="line">        // ie、chrome的安全机制无法修改parent.location.hash，</div><div class="line">        // 所以要利用一个中间的cnblogs域下的代理iframe</div><div class="line">        var ifrproxy = document.createElement(&apos;iframe&apos;);</div><div class="line">        ifrproxy.style.display = &apos;none&apos;;</div><div class="line">        ifrproxy.src = &apos;http://a.com/test/cscript/cs3.html#somedata&apos;;    // 注意该文件在&quot;a.com&quot;域下</div><div class="line">        document.body.appendChild(ifrproxy);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>A.com下的域名cs3.html代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//因为parent.parent和自身属于同一个域，所以可以改变其location.hash的值</div><div class="line">parent.parent.location.hash = self.location.hash.substring(1);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>当然这样做也存在很多缺点，诸如数据直接暴露在了url中，数据容量和类型都有限等……</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/04/17/window-name实现的跨域数据传输/">window.name实现的跨域数据传输</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><p>有三个页面：</p>
+<ul>
+<li>a.com/app.html：应用页面。</li>
+<li>a.com/proxy.html：代理文件，一般是一个没有任何内容的html文件，需要和应用页面在同一域下。</li>
+<li><p>b.com/data.html：应用页面需要获取数据的页面，可称为数据页面。<br>实现起来基本步骤如下：</p>
+</li>
+<li><p>在应用页面（a.com/app.html）中创建一个iframe，把其src指向数据页面（b.com/data.html）。<br>数据页面会把数据附加到这个iframe的window.name上，data.html代码如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    window.name = &apos;I was there!&apos;;    // 这里是要传输的数据，大小一般为2M，IE和firefox下可以大至32M左右</div><div class="line">                                     // 数据格式可以自定义，如json、字符串</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>在应用页面（a.com/app.html）中监听iframe的onload事件，在此事件中设置这个iframe的src指向本地域的代理文件（代理文件和应用页面在同一域下，所以可以相互通信）。app.html部分代码如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    var state = 0,</div><div class="line">    iframe = document.createElement(&apos;iframe&apos;),</div><div class="line">    loadfn = function() &#123;</div><div class="line">        if (state === 1) &#123;</div><div class="line">            var data = iframe.contentWindow.name;    // 读取数据</div><div class="line">            alert(data);    //弹出&apos;I was there!&apos;</div><div class="line">        &#125; else if (state === 0) &#123;</div><div class="line">            state = 1;</div><div class="line">            iframe.contentWindow.location = &quot;http://a.com/proxy.html&quot;;    // 设置的代理文件</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    iframe.src = &apos;http://b.com/data.html&apos;;</div><div class="line">    if (iframe.attachEvent) &#123;</div><div class="line">        iframe.attachEvent(&apos;onload&apos;, loadfn);</div><div class="line">    &#125; else &#123;</div><div class="line">        iframe.onload  = loadfn;</div><div class="line">    &#125;</div><div class="line">    document.body.appendChild(iframe);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>获取数据以后销毁这个iframe，释放内存；这也保证了安全（不被其他域frame js访问）。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">    iframe.contentWindow.document.write(&apos;&apos;);</div><div class="line">    iframe.contentWindow.close();</div><div class="line">    document.body.removeChild(iframe);</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>总结起来即：iframe的src属性由外域转向本地域，跨域数据即由iframe的window.name从外域传递到本地域。这个就巧妙地绕过了浏览器的跨域访问限制，但同时它又是安全操作。</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/04/17/AJAX跨域访问——XMLHttpRequest代理实现/">AJAX跨域访问——XMLHttpRequest代理实现</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li><p>跨域访问简单来说就是A网站的JavaScript代码试图访问B网站,包括提交内容和获取内容.由于安全原因,跨域访问是被各大浏览器所默认禁止的.在广域网环境中，由于浏览器的安全限制，网络连接的跨域访问时不被允许的，XmlHttpRequest也不例外。但有时候跨域访问资源是必需的。</p>
+</li>
+<li><p>我们不能在浏览器端直接使用AJAX来跨域访问资源，但是在服务器端是没有这种跨域安全限制的。所以，我们只需要让服务器端帮我们完成“跨域访问”的工作，然后在浏览器端用AJAX获取服务器端“跨域访问”的结果就可以了。这就是所谓的在服务器端创建一个 XmlHttpRequest代理，通过这个代理来访问其他域名下的资源。</p>
+</li>
+<li><p>使用XmlHttpRequest访问同一域名下的资源：直接访问：<br><img src="http://dl2.iteye.com/upload/attachment/0118/1805/bab2a499-19f0-3fe7-b506-c4a9f9eff5af.jpg" alt="image"></p>
+</li>
+<li>用服务器端的XmlHttpRequest代理来跨域访问资源：<br><img src="http://dl2.iteye.com/upload/attachment/0118/1807/a0c63504-f1af-340e-b897-52e365fd0571.jpg" alt="image"></li>
+<li><p>前端页面代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if(url.indexOf(&quot;http://&quot;)==0)&#123;</div><div class="line">     url=url.replace(&quot;?&quot;,&quot;&amp;&quot;);</div><div class="line">     url=&quot;Proxy?url&quot;+url;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>后端代码代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">public class Proxy extends javax.servlet.http.HttpServlet &#123;</div><div class="line">    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)</div><div class="line">            throws javax.servlet.ServletException, java.io.IOException  &#123;</div><div class="line">        response.setContentType(&quot;text/html;charset=GB2312&quot;);</div><div class="line">        String url = request.getParameter(&quot;url&quot;);</div><div class="line">        StringBuffer param = new StringBuffer();</div><div class="line">        Enumeration enu = request.getParameterNames();</div><div class="line">        int total = 0;</div><div class="line">        while(enu.hasMoreElements())&#123;</div><div class="line">            String name = (String)enu.nextElement();</div><div class="line">            if(!name.equals(&quot;url&quot;))&#123;</div><div class="line">                if(total == 0)&#123;</div><div class="line">                    param.append(name).append(&quot;=&quot;).append(URLEncoder.encode(request.getParameter(name),&quot;UTF-8&quot;));</div><div class="line">                &#125; else&#123;</div><div class="line">                    param.append(&quot;&amp;&quot;).append(name).append(&quot;=&quot;).append(URLEncoder.encode(request.getParameter(name),&quot;UTF-8&quot;));</div><div class="line">                &#125;</div><div class="line">                total++;</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        PrintWriter out = response.getWriter();</div><div class="line">        if(url != null)&#123;</div><div class="line">            URL connect = new URL(url.toString());</div><div class="line">            URLConnection connection = connect.openConnection();</div><div class="line">            connection.setDoOutput(true);</div><div class="line">            OutputStreamWriter paramout = new OutputStreamWriter(connection.getOutputStream());</div><div class="line">            paramout.write(param.toString());</div><div class="line">            paramout.flush();</div><div class="line">            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(),&quot;GB2312&quot;));</div><div class="line">            String line;</div><div class="line">            while((line = reader.readLine()) != null)&#123;</div><div class="line">               out.println(line);</div><div class="line">            &#125;</div><div class="line">            paramout.close();</div><div class="line">            reader.close();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure></li>
+</ul>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/04/17/JS创建动态脚本跨域/">JS创建动态脚本跨域</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li>script标签本身就可以访问其它域的资源，不受浏览器同源策略的限制，可以通过在页面动态创建script标签，代码如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var script = document.createElement(&apos;script&apos;);</div><div class="line">script.src = &quot;http://aa.xx.com/js/*.js&quot;;</div><div class="line">document.body.appendChild(script);</div></pre></td></tr></table></figure>
+<ul>
+<li>这样通过动态创建script标签就可以加载其它域的js文件，然后通过本页面就可以调用加载后js文件的函数，这样做的缺陷就是不能加载其它域的文档，只能是js文件，jsonp便是通过这种方式实现的，jsonp通过向其它域传入一个callback参数，通过其他域的后台将callback参数值和json串包装成javascript函数返回，因为是通过script标签发出的请求，浏览器会将返回来的字符串按照javascript进行解析执行，实现了域与域之间的数据传输。</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/04/17/通过修复web-xml来实现跨域/">通过修复web.xml来实现跨域</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li>在开发项目中加入支持库,或把支持库直接丢到tomcat的lib目录下，下载地址：<a href="http://cdn.besdlab.cn/cors-lib.rar" target="_blank" rel="external">http://cdn.besdlab.cn/cors-lib.rar</a></li>
+<li>修改web.xml，增加以下代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;filter&gt;</div><div class="line">        &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">        &lt;filter-class&gt;com.thetransactioncompany.cors.CORSFilter&lt;/filter-class&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.allowOrigin&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;*&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.supportedMethods&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;GET, POST, HEAD, PUT, DELETE&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.supportedHeaders&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;Accept, Origin, X-Requested-With, Content-Type, Last-Modified&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.exposedHeaders&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;Set-Cookie&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;cors.supportsCredentials&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;true&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">    &lt;/filter&gt;</div><div class="line">    &lt;filter-mapping&gt;</div><div class="line">        &lt;filter-name&gt;CORS&lt;/filter-name&gt;</div><div class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</div><div class="line">   &lt;/filter-mapping&gt;</div></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/04/17/通过nginx实现跨域请求/">通过nginx实现跨域请求</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年4月17日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h3><ul>
+<li>把下面的配置保存成一个文件，例如：nginx_cors，引入到Nginx的代理配置中去。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">if ($request_method = &apos;OPTIONS&apos;) &#123;</div><div class="line">       add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</div><div class="line">       add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</div><div class="line">       #</div><div class="line">       # Custom headers and headers various browsers *should* be OK with but aren&apos;t</div><div class="line">       #</div><div class="line">       add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</div><div class="line">       #</div><div class="line">       # Tell client that this pre-flight info is valid for 20 days</div><div class="line">       #</div><div class="line">       add_header &apos;Access-Control-Max-Age&apos; 1728000;</div><div class="line">       add_header &apos;Content-Type&apos; &apos;text/plain charset=UTF-8&apos;;</div><div class="line">       add_header &apos;Content-Length&apos; 0;</div><div class="line">       return 204;</div><div class="line">    &#125;</div><div class="line">    if ($request_method = &apos;POST&apos;) &#123;</div><div class="line">       add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</div><div class="line">       add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</div><div class="line">       add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</div><div class="line">    &#125;</div><div class="line">    if ($request_method = &apos;GET&apos;) &#123;</div><div class="line">       add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</div><div class="line">       add_header &apos;Access-Control-Allow-Methods&apos; &apos;GET, POST, OPTIONS&apos;;</div><div class="line">       add_header &apos;Access-Control-Allow-Headers&apos; &apos;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&apos;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">location ~* ^/ &#123;</div><div class="line"></div><div class="line">               proxy_pass  http://www.jd.com;</div><div class="line"></div><div class="line">               access_log   /var/log/nginx/jd-access.log main;</div><div class="line"></div><div class="line">               include  /etc/nginx/nginx_cors;</div><div class="line"></div><div class="line">               max_ranges 0;</div><div class="line"></div><div class="line">           &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>再通过访问Nginx这台机器上的地址，就能跨域访问www.jd.com下所有非权限控制的资源和数据了。</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/04/15/我的新博客上线啦/">我的新博客上线啦</a>
         
       </h1>
@@ -240,89 +549,6 @@
 <li>工欲善其事，必先利其器，成长离不开积累和历练，千里之行始于足下，如今我就开始好好的做好自己，写博客不是因为有人需要我，而是我很需要借此机会成长！</li>
 </ul>
 
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/04/15/hello-world/">Hello World</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年4月15日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/04/08/ddd/">ddd</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年4月8日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <h1 id="sssss"><a href="#sssss" class="headerlink" title="sssss"></a>sssss</h1>
         
       
     </div>
