@@ -6,8 +6,8 @@
   @include clearfix; 
   padding: $header-padding;
 
-  @import 'header/_logo';
-  @import 'header/_menu';
+  @import '_header/_logo';
+  @import '_header/_menu';
 }
 
 

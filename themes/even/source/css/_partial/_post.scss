@@ -14,10 +14,10 @@
     border-top: $post-border;
   }
 
-  @import 'post/_header';
-  @import 'post/_toc';
-  @import 'post/_content';
-  @import 'post/_copyright';
-  @import 'post/_reward';
-  @import 'post/_footer';
+  @import '_post/_header';
+  @import '_post/_toc';
+  @import '_post/_content';
+  @import '_post/_copyright';
+  @import '_post/_reward';
+  @import '_post/_footer';
 }
