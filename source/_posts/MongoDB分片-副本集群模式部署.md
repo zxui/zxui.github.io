@@ -10,7 +10,7 @@ tags:
 * 操作系统： Linux（以CentOS 6.5为例）
 * 硬件：3台服务器（或3个VM）
 ## 2.拓扑图
-![image](http://note.youdao.com/favicon.ico)
+![image](http://zxshen.win/top.jpg)
 ## 3.安装MongDB
 * 创建/etc/yum.repos.d/mongodb-org-3.4.repo文件
 ```
