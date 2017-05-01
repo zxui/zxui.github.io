@@ -49,3 +49,60 @@
   white-space: nowrap;
   border: 1px solid #fff;
 }
+.double-flash {
+  animation: double-flash_175 4s ease infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes double-flash_175 {
+  0% { opacity:1 }
+  12.5% { opacity:0 }
+  25% { opacity:1 }
+  37.5% { opacity:0 }
+  50% { opacity:1 }
+  100% { opacity:1 }
+}
+
+.shake {
+  animation: shake_7398 3.875s ease infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes shake_7398 {
+  0% { transform:rotate(-12deg) }
+  5.16129% { transform:rotate(12deg) }
+  6.45161% { transform:rotate(24deg) }
+  11.6129% { transform:rotate(-24deg) }
+  12.90323% { transform:rotate(-24deg) }
+  18.06451% { transform:rotate(24deg) }
+  19.35484% { transform:rotate(24deg) }
+  24.51613% { transform:rotate(-24deg) }
+  25.80645% { transform:rotate(-24deg) }
+  30.96774% { transform:rotate(24deg) }
+  32.25807% { transform:rotate(24deg) }
+  37.41935% { transform:rotate(-24deg) }
+  38.70968% { transform:rotate(-24deg) }
+  43.87097% { transform:rotate(24deg) }
+  48.3871% { transform:rotate(0deg) }
+  100% { transform:rotate(0deg) }
+}
+
+.ring {
+  animation: ring_6214 2.4s ease infinite;
+  transform-origin: 50% 0%;
+}
+
+@keyframes ring_6214 {
+  0% { transform: rotate(-15deg) }
+  1.66667% { transform: rotate(15deg) }
+  3.33333% { transform: rotate(-18deg) }
+  5% { transform: rotate(18deg) }
+  6.66667% { transform: rotate(-22deg) }
+  8.33333% { transform: rotate(22deg) }
+  10% { transform: rotate(-18deg) }
+  11.66667% { transform: rotate(18deg) }
+  13.33333% { transform: rotate(-12deg) }
+  15% { transform: rotate(12deg) }
+  16.66667% { transform: rotate(0deg) }
+  100% { transform: rotate(0deg) }
+}

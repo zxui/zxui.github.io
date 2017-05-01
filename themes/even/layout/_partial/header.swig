@@ -13,11 +13,11 @@
               {{ name }}
             {% else %}
                 {% if itemName.startsWith('博客') %}
-                    {{ itemName }}<sup class="el-badge__content is-fixed">9</sup>
+                    {{ itemName }}<sup class="el-badge__content is-fixed">{{site.posts.length}}</sup>
                 {% elseif itemName.startsWith('作品') %}
                     {{ itemName }}<sup class="el-badge__content is-fixed">5</sup>
                 {% elseif itemName.startsWith('首页') %}
-                    {{ itemName }}<sup class="el-badge__content is-fixed">hot</sup>
+                    {{ itemName }}<sup class="el-badge__content is-fixed ring">hot</sup>
                 {% elseif itemName.startsWith('关于') %}
                     {{ itemName }}<sup class="el-badge__content is-fixed">new</sup>
                 {% else %}
