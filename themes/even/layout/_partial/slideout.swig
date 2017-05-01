@@ -14,12 +14,22 @@
     {% for name, path in theme.menu %}
       <a href="{{ url_for(path) }}">
         <li class="mobile-menu-item">
-          {% set itemName = 'menu.' + name.toLowerCase() %}
-          {% if itemName.startsWith('menu') %}
-            {{ name }}
-          {% else %}
-            {{ __(itemName) }}
-          {% endif %}
+            {% set itemName = __('menu.' + name.toLowerCase()) %}
+            {% if itemName.startsWith('menu') %}
+              {{ name }}
+            {% else %}
+                {% if itemName.startsWith('博客') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">9</sup>
+                {% elseif itemName.startsWith('作品') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">5</sup>
+                {% elseif itemName.startsWith('首页') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">hot</sup>
+                {% elseif itemName.startsWith('关于') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">new</sup>
+                {% else %}
+                    {{ itemName }}
+                {% endif %}
+            {% endif %}
         </li>
       </a>
     {% endfor %}

@@ -1,4 +1,4 @@
-<div class="logo-wrapper">
+<div class="logo-wrapper bounce">
   <a href="{{ url_for('.') }}" class="logo">{{ config.title }}</a>
 </div>
 
@@ -12,7 +12,17 @@
             {% if itemName.startsWith('menu') %}
               {{ name }}
             {% else %}
-              {{ itemName }}
+                {% if itemName.startsWith('博客') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">9</sup>
+                {% elseif itemName.startsWith('作品') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">5</sup>
+                {% elseif itemName.startsWith('首页') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">hot</sup>
+                {% elseif itemName.startsWith('关于') %}
+                    {{ itemName }}<sup class="el-badge__content is-fixed">new</sup>
+                {% else %}
+                    {{ itemName }}
+                {% endif %}
             {% endif %}
           </a>
         </li>
