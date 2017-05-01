@@ -98,37 +98,45 @@
     
       <a href="/">
         <li class="mobile-menu-item">
-          
-          
-            Home
-          
+            
+            
+                
+                    首页<sup class="el-badge__content is-fixed">hot</sup>
+                
+            
         </li>
       </a>
     
       <a href="/archives/">
         <li class="mobile-menu-item">
-          
-          
-            Archives
-          
+            
+            
+                
+                    博客<sup class="el-badge__content is-fixed">9</sup>
+                
+            
         </li>
       </a>
     
       <a href="/works">
         <li class="mobile-menu-item">
-          
-          
-            works
-          
+            
+            
+                
+                    作品<sup class="el-badge__content is-fixed">5</sup>
+                
+            
         </li>
       </a>
     
       <a href="/about">
         <li class="mobile-menu-item">
-          
-          
-            About
-          
+            
+            
+                
+                    关于<sup class="el-badge__content is-fixed">new</sup>
+                
+            
         </li>
       </a>
     
@@ -136,7 +144,7 @@
 </nav>
 
     <div class="container" id="mobile-panel">
-      <header id="header" class="header"><div class="logo-wrapper">
+      <header id="header" class="header"><div class="logo-wrapper bounce">
   <a href="/." class="logo">ZX_UI</a>
 </div>
 
@@ -148,7 +156,9 @@
           <a class="menu-item-link" href="/">
             
             
-              首页
+                
+                    首页<sup class="el-badge__content is-fixed">hot</sup>
+                
             
           </a>
         </li>
@@ -157,7 +167,9 @@
           <a class="menu-item-link" href="/archives/">
             
             
-              博客
+                
+                    博客<sup class="el-badge__content is-fixed">9</sup>
+                
             
           </a>
         </li>
@@ -166,7 +178,9 @@
           <a class="menu-item-link" href="/works">
             
             
-              作品
+                
+                    作品<sup class="el-badge__content is-fixed">5</sup>
+                
             
           </a>
         </li>
@@ -175,7 +189,9 @@
           <a class="menu-item-link" href="/about">
             
             
-              关于
+                
+                    关于<sup class="el-badge__content is-fixed">new</sup>
+                
             
           </a>
         </li>
@@ -192,6 +208,165 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2017/05/01/MongoDB分片-副本集群模式部署/">MongoDB分片+副本集群模式部署</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年5月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li>近期因产品升级，业务扩展的需要，将MongoDB单机改换成集群模式，于是配合运维和测试的小伙伴一起验证MongDB集群，由于都没有使用过分片集群，而刚好我前一份工作中构搭建和应用过MongoDB副本集群，这次一起将副本+分片集群从头部署了一遍，将部署的整个过程记录如下。<h2 id="1-集群环境"><a href="#1-集群环境" class="headerlink" title="1.集群环境"></a>1.集群环境</h2></li>
+<li>集群模式： 分片+副本</li>
+<li>操作系统： Linux（以CentOS 6.5为例）</li>
+<li>硬件：3台服务器（或3个VM）<h2 id="2-拓扑图"><a href="#2-拓扑图" class="headerlink" title="2.拓扑图"></a>2.拓扑图</h2><img src="http://zxshen.win/top.jpg" alt="image"><h2 id="3-安装MongDB"><a href="#3-安装MongDB" class="headerlink" title="3.安装MongDB"></a>3.安装MongDB</h2></li>
+<li><p>创建/etc/yum.repos.d/mongodb-org-3.4.repo文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[mongodb-org-3.4]</div><div class="line">name=MongoDB Repository</div><div class="line">baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/</div><div class="line">gpgcheck=1</div><div class="line">enabled=1</div><div class="line">gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行安装命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum install -y mongodb-org</div></pre></td></tr></table></figure>
+</li>
+<li><p>在三台服务器上分别执行以上操作，安装好MongoDB</p>
+</li>
+</ul>
+<p>参考链接:<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/" target="_blank" rel="external">https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/</a></p>
+<h2 id="4-配置集群"><a href="#4-配置集群" class="headerlink" title="4.配置集群"></a>4.配置集群</h2><h3 id="4-1创建节点目录"><a href="#4-1创建节点目录" class="headerlink" title="4.1创建节点目录"></a>4.1创建节点目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /var/lib/mongodb/conf</div><div class="line">mkdir -p /var/lib/mongodb/data/&#123;shard1,shard2,shard3,config&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-1创建节点配置"><a href="#4-1创建节点配置" class="headerlink" title="4.1创建节点配置"></a>4.1创建节点配置</h3><ul>
+<li><p>进入/var/lib/mongodb/conf目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /var/lib/mongodb/conf</div></pre></td></tr></table></figure>
+</li>
+<li><p>把附件中的配置文件copy在/var/lib/mongodb/conf目录下</p>
+</li>
+<li>将/var/lib/mongodb结点目录复制到其它两台服务器中，目录一至</li>
+<li><p>分别启动三台服务器中的结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">numactl --interleave=all mongod -f shard1.conf</div><div class="line">numactl --interleave=all mongod -f shard2.conf</div><div class="line">numactl --interleave=all mongod -f shard3.conf</div><div class="line">numactl --interleave=all mongod -f configdb.conf</div></pre></td></tr></table></figure>
+</li>
+<li><p>等三台服务器上的mongod都启动好了后，再分别启动mongos</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">numactl --interleave=all mongos -f mongos.conf</div></pre></td></tr></table></figure>
+</li>
+<li><p>注：可以不用numactl –interleave=all 启动，但用numactl关闭NUMA特性,可以提升数据性能</p>
+</li>
+</ul>
+<h3 id="4-3设置第一个分片集"><a href="#4-3设置第一个分片集" class="headerlink" title="4.3设置第一个分片集"></a>4.3设置第一个分片集</h3><ul>
+<li><p>进入服务器1第一个结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo 172.16.16.1:10001/admin</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义副本集</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config = &#123; _id:&quot;shard1&quot;, members:[</div><div class="line">&#123;_id:0,host:&quot;172.16.16.1:10001&quot;,priority:1&#125;,</div><div class="line">&#123;_id:1,host:&quot;172.16.16.2:10001&quot;,priority:2&#125;,</div><div class="line">&#123;_id:2,host:&quot;172.16.16.3:10001&quot;,priority:3&#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>初始化副本集<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rs.initiate(config);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-4设置第二个分片集"><a href="#4-4设置第二个分片集" class="headerlink" title="4.4设置第二个分片集"></a>4.4设置第二个分片集</h3><ul>
+<li>进入服务器1第二个结点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo 172.16.16.1:10002/admin</div></pre></td></tr></table></figure>
+<ul>
+<li><p>定义副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config = &#123; _id:&quot;shard2&quot;, members:[</div><div class="line">&#123;_id:0,host:&quot;172.16.16.1:10002&quot;,priority:2&#125;,</div><div class="line">&#123;_id:1,host:&quot;172.16.16.2:10002&quot;,priority:3&#125;,</div><div class="line">&#123;_id:2,host:&quot;172.16.16.3:10002&quot;,priority:1&#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>始化副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rs.initiate(config);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-5设置第三个分片集"><a href="#4-5设置第三个分片集" class="headerlink" title="4.5设置第三个分片集"></a>4.5设置第三个分片集</h3><ul>
+<li>进入服务器1第三个结点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo 172.16.16.1:10003/admin</div></pre></td></tr></table></figure>
+<ul>
+<li><p>定义副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config = &#123; _id:&quot;shard3&quot;, members:[</div><div class="line">&#123;_id:0,host:&quot;172.16.16.1:10003&quot;,priority:3&#125;,</div><div class="line">&#123;_id:1,host:&quot;172.16.16.2:10003&quot;,priority:1&#125;,</div><div class="line">&#123;_id:2,host:&quot;172.16.16.3:10003&quot;,priority:2&#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>始化副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rs.initiate(config);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-6设置配置服务器副本集"><a href="#4-6设置配置服务器副本集" class="headerlink" title="4.6设置配置服务器副本集"></a>4.6设置配置服务器副本集</h3><p>进入服务器1配置结点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo 172.16.16.1:20000/admin</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>定义配置副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">config = &#123; _id:&quot;configdb&quot;, configsvr: true, members:[</div><div class="line">&#123;_id:0,host:&quot;172.16.16.1:20000&quot;,priority:3&#125;,</div><div class="line">&#123;_id:1,host:&quot;172.16.16.2:20000&quot;,priority:2&#125;,</div><div class="line">&#123;_id:2,host:&quot;172.16.16.3:20000&quot;,priority:1&#125;</div><div class="line">]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化配置副本集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rs.initiate(config);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-7串联路由服务器与分片副本集"><a href="#4-7串联路由服务器与分片副本集" class="headerlink" title="4.7串联路由服务器与分片副本集"></a>4.7串联路由服务器与分片副本集</h3><ul>
+<li><p>进入服务器1路由结点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo 172.16.16.1:30000/admin</div></pre></td></tr></table></figure>
+</li>
+<li><p>设置分片配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">db.runCommand( &#123; addshard : &quot;shard1/172.16.16.1:10001,172.16.16.2:10001,172.16.16.3:10001&quot;&#125;);</div><div class="line">db.runCommand( &#123; addshard : &quot;shard2/172.16.16.1:10002,172.16.16.2:10002,172.16.16.3:10002&quot;&#125;);</div><div class="line">db.runCommand( &#123; addshard : &quot;shard3/172.16.16.1:10003,172.16.16.2:10003,172.16.16.3:10003&quot;&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看分片服务器配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.runCommand(&#123;listshards : 1 &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-8创建管理用户"><a href="#4-8创建管理用户" class="headerlink" title="4.8创建管理用户"></a>4.8创建管理用户</h3><ul>
+<li><p>分别在<strong>三台</strong>服务器中的<strong>primary主结点</strong>创建管理员用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">use admin;</div><div class="line">db.createUser( &#123; &quot;user&quot; : &quot;root&quot;,</div><div class="line">&quot;pwd&quot;: &quot;password&quot;,</div><div class="line">&quot;roles&quot; : [ &#123; role: &quot;clusterAdmin&quot;, db: &quot;admin&quot; &#125;,</div><div class="line">&#123; role: &quot;readWriteAnyDatabase&quot;, db: &quot;admin&quot; &#125;,</div><div class="line">&#123; role: &quot;root&quot;, db: &quot;admin&quot; &#125;,</div><div class="line">&quot;readWrite&quot;</div><div class="line">]</div><div class="line">&#125;</div><div class="line">)</div></pre></td></tr></table></figure>
+</li>
+<li><p>生成keyfile(每个进程的key file都保持一致)，在服务器中执行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /var/lib/mongodb/bin/</div><div class="line">openssl rand -base64 753 &gt; keyfile</div><div class="line">chmod 600 keyfile</div></pre></td></tr></table></figure>
+</li>
+<li><p>将生成的keyfile 通过scp拷贝到其他机器的/var/lib/mongodb/bin/目录下</p>
+</li>
+<li>防止scp过程中keyfile文件受损，导致不一至，可通过对比文件的MD5<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">md5sum keyfile</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-9重启集群"><a href="#4-9重启集群" class="headerlink" title="4.9重启集群"></a>4.9重启集群</h3><ul>
+<li><p>先停ballancer(部署的时候可以不管，但用于生产过程中，还是先停一下比较保险)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh.stopBalancer()</div></pre></td></tr></table></figure>
+</li>
+<li><p>关闭三台服务器的mongod和mongos服务<br>可以用 kill 15 pid 来关闭所有mongo</p>
+</li>
+</ul>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">killall mongos</div><div class="line">killall mongod</div></pre></td></tr></table></figure></p>
+<ul>
+<li>修改三台服务器/var/lib/mongodb/conf下的配置文件，打开security 的keyfile注释，先启动mongod，再启动mongos<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 分别启动三台服务器中的结点</div><div class="line">numactl --interleave=all mongod -f shard1.conf</div><div class="line">numactl --interleave=all mongod -f shard2.conf</div><div class="line">numactl --interleave=all mongod -f shard3.conf</div><div class="line">numactl --interleave=all mongod -f configdb.conf</div><div class="line"></div><div class="line">// 等三台服务器上的mongod都启动好了后，再分别启动mongos</div><div class="line">numactl --interleave=all mongos -f mongos.conf</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-10设置分片键"><a href="#4-10设置分片键" class="headerlink" title="4.10设置分片键"></a>4.10设置分片键</h3><ul>
+<li><p>集群默认是不自动分片，且集群中并非所有数据库和集合都需要采用分片模式，所以我们需要通过手动配置的方式来指定分片数据库和分片集合，其中关键在设置分片键(需要视业务设置)，在选定作为分片键的列必须创建索引，所有文档都必须有片键值，（且值不能为null），在集合分片完成后，才可以插入片键值为null的文档；<br>如果集合为空，mongodb 将在激活集合分片（sh.shardCollection）时自动创建索引</p>
+</li>
+<li><p>创建分片键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mongo 172.16.16.1:30000/admin</div><div class="line">db.auth(&apos;root&apos;,&apos;password&apos;)</div><div class="line">db.runCommand(&#123;&quot;enablesharding&quot;:&quot;IM&quot;&#125;);</div><div class="line">db.runCommand(&#123;&quot;shardcollection&quot;:&quot;IM.record&quot;,&quot;key&quot;:&#123;&quot;appid&quot;:1,&quot;to&quot;:1&#125;&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>15.根据业务需要创建业务账号和密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 创建用户和密码：</div><div class="line">use 数据库名</div><div class="line">db.createUser(&#123; user:&quot;db_user&quot;,pwd:&quot;password&quot;,roles:[&#123;role:&quot;readWrite&quot;, db: &quot;db_name&quot;&#125;]&#125;)</div><div class="line"></div><div class="line">// 访问集群</div><div class="line">mongodb://db_user:password@172.16.16.1:30000,172.16.16.2:30000,172.16.16.3:30000/db_name?readPreference=primaryPreferred</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-完结"><a href="#5-完结" class="headerlink" title="5.完结"></a>5.完结</h2>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
     
       
   <article class="post">
@@ -628,6 +803,8 @@
   <span class="copyright-year">
     
     &copy; 
+     
+      2016 - 
     
     2017
 

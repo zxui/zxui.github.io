@@ -33,7 +33,6 @@
 
 
 <meta name="description" content="实现过程 跨域访问简单来说就是A网站的JavaScript代码试图访问B网站,包括提交内容和获取内容.由于安全原因,跨域访问是被各大浏览器所默认禁止的.在广域网环境中，由于浏览器的安全限制，网络连接的跨域访问时不被允许的，XmlHttpRequest也不例外。但有时候跨域访问资源是必需的。  我们不能在浏览器端直接使用AJAX来跨域访问资源，但是在服务器端是没有这种跨域安全限制的。所以，我们只需要">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AJAX跨域访问——XMLHttpRequest代理实现">
 <meta property="og:url" content="http://zxshen.win/2017/04/17/AJAX跨域访问——XMLHttpRequest代理实现/index.html">
@@ -41,7 +40,7 @@
 <meta property="og:description" content="实现过程 跨域访问简单来说就是A网站的JavaScript代码试图访问B网站,包括提交内容和获取内容.由于安全原因,跨域访问是被各大浏览器所默认禁止的.在广域网环境中，由于浏览器的安全限制，网络连接的跨域访问时不被允许的，XmlHttpRequest也不例外。但有时候跨域访问资源是必需的。  我们不能在浏览器端直接使用AJAX来跨域访问资源，但是在服务器端是没有这种跨域安全限制的。所以，我们只需要">
 <meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0118/1805/bab2a499-19f0-3fe7-b506-c4a9f9eff5af.jpg">
 <meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0118/1807/a0c63504-f1af-340e-b897-52e365fd0571.jpg">
-<meta property="og:updated_time" content="2017-04-17T14:48:14.696Z">
+<meta property="og:updated_time" content="2017-05-01T12:44:46.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AJAX跨域访问——XMLHttpRequest代理实现">
 <meta name="twitter:description" content="实现过程 跨域访问简单来说就是A网站的JavaScript代码试图访问B网站,包括提交内容和获取内容.由于安全原因,跨域访问是被各大浏览器所默认禁止的.在广域网环境中，由于浏览器的安全限制，网络连接的跨域访问时不被允许的，XmlHttpRequest也不例外。但有时候跨域访问资源是必需的。  我们不能在浏览器端直接使用AJAX来跨域访问资源，但是在服务器端是没有这种跨域安全限制的。所以，我们只需要">
@@ -103,37 +102,45 @@
     
       <a href="/">
         <li class="mobile-menu-item">
-          
-          
-            Home
-          
+            
+            
+                
+                    首页<sup class="el-badge__content is-fixed">hot</sup>
+                
+            
         </li>
       </a>
     
       <a href="/archives/">
         <li class="mobile-menu-item">
-          
-          
-            Archives
-          
+            
+            
+                
+                    博客<sup class="el-badge__content is-fixed">9</sup>
+                
+            
         </li>
       </a>
     
       <a href="/works">
         <li class="mobile-menu-item">
-          
-          
-            works
-          
+            
+            
+                
+                    作品<sup class="el-badge__content is-fixed">5</sup>
+                
+            
         </li>
       </a>
     
       <a href="/about">
         <li class="mobile-menu-item">
-          
-          
-            About
-          
+            
+            
+                
+                    关于<sup class="el-badge__content is-fixed">new</sup>
+                
+            
         </li>
       </a>
     
@@ -141,7 +148,7 @@
 </nav>
 
     <div class="container" id="mobile-panel">
-      <header id="header" class="header"><div class="logo-wrapper">
+      <header id="header" class="header"><div class="logo-wrapper bounce">
   <a href="/." class="logo">ZX_UI</a>
 </div>
 
@@ -153,7 +160,9 @@
           <a class="menu-item-link" href="/">
             
             
-              首页
+                
+                    首页<sup class="el-badge__content is-fixed">hot</sup>
+                
             
           </a>
         </li>
@@ -162,7 +171,9 @@
           <a class="menu-item-link" href="/archives/">
             
             
-              博客
+                
+                    博客<sup class="el-badge__content is-fixed">9</sup>
+                
             
           </a>
         </li>
@@ -171,7 +182,9 @@
           <a class="menu-item-link" href="/works">
             
             
-              作品
+                
+                    作品<sup class="el-badge__content is-fixed">5</sup>
+                
             
           </a>
         </li>
@@ -180,7 +193,9 @@
           <a class="menu-item-link" href="/about">
             
             
-              关于
+                
+                    关于<sup class="el-badge__content is-fixed">new</sup>
+                
             
           </a>
         </li>
@@ -297,15 +312,15 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/04/17/JS创建动态脚本跨域/">
+      <a class="prev" href="/2017/04/17/window-name实现的跨域数据传输/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">JS创建动态脚本跨域</span>
+        <span class="prev-text nav-default">window.name实现的跨域数据传输</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
-      <a class="next" href="/2017/04/17/window-name实现的跨域数据传输/">
-        <span class="next-text nav-default">window.name实现的跨域数据传输</span>
+      <a class="next" href="/2017/04/17/JS创建动态脚本跨域/">
+        <span class="next-text nav-default">JS创建动态脚本跨域</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -383,6 +398,8 @@
   <span class="copyright-year">
     
     &copy; 
+     
+      2016 - 
     
     2017
 

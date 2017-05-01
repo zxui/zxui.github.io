@@ -33,13 +33,12 @@
 
 
 <meta name="description" content="实现过程 这个办法比较绕，但是可以解决完全跨域情况下的脚步置换问题。原理是利用location.hash来进行传值。在url： http://a.com#helloword 中的‘#helloworld’就是location.hash，改变hash并不会导致页面刷新，所以可以利用hash值来进行数据传递，当然数据容量是有限的。假设域名a.com下的文件cs1.html要和cnblogs.com域名">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用iframe和location.hash">
 <meta property="og:url" content="http://zxshen.win/2017/04/17/利用iframe和location-hash/index.html">
 <meta property="og:site_name" content="ZX_UI">
 <meta property="og:description" content="实现过程 这个办法比较绕，但是可以解决完全跨域情况下的脚步置换问题。原理是利用location.hash来进行传值。在url： http://a.com#helloword 中的‘#helloworld’就是location.hash，改变hash并不会导致页面刷新，所以可以利用hash值来进行数据传递，当然数据容量是有限的。假设域名a.com下的文件cs1.html要和cnblogs.com域名">
-<meta property="og:updated_time" content="2017-04-17T15:01:22.527Z">
+<meta property="og:updated_time" content="2017-05-01T12:44:46.913Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用iframe和location.hash">
 <meta name="twitter:description" content="实现过程 这个办法比较绕，但是可以解决完全跨域情况下的脚步置换问题。原理是利用location.hash来进行传值。在url： http://a.com#helloword 中的‘#helloworld’就是location.hash，改变hash并不会导致页面刷新，所以可以利用hash值来进行数据传递，当然数据容量是有限的。假设域名a.com下的文件cs1.html要和cnblogs.com域名">
@@ -100,37 +99,45 @@
     
       <a href="/">
         <li class="mobile-menu-item">
-          
-          
-            Home
-          
+            
+            
+                
+                    首页<sup class="el-badge__content is-fixed">hot</sup>
+                
+            
         </li>
       </a>
     
       <a href="/archives/">
         <li class="mobile-menu-item">
-          
-          
-            Archives
-          
+            
+            
+                
+                    博客<sup class="el-badge__content is-fixed">9</sup>
+                
+            
         </li>
       </a>
     
       <a href="/works">
         <li class="mobile-menu-item">
-          
-          
-            works
-          
+            
+            
+                
+                    作品<sup class="el-badge__content is-fixed">5</sup>
+                
+            
         </li>
       </a>
     
       <a href="/about">
         <li class="mobile-menu-item">
-          
-          
-            About
-          
+            
+            
+                
+                    关于<sup class="el-badge__content is-fixed">new</sup>
+                
+            
         </li>
       </a>
     
@@ -138,7 +145,7 @@
 </nav>
 
     <div class="container" id="mobile-panel">
-      <header id="header" class="header"><div class="logo-wrapper">
+      <header id="header" class="header"><div class="logo-wrapper bounce">
   <a href="/." class="logo">ZX_UI</a>
 </div>
 
@@ -150,7 +157,9 @@
           <a class="menu-item-link" href="/">
             
             
-              首页
+                
+                    首页<sup class="el-badge__content is-fixed">hot</sup>
+                
             
           </a>
         </li>
@@ -159,7 +168,9 @@
           <a class="menu-item-link" href="/archives/">
             
             
-              博客
+                
+                    博客<sup class="el-badge__content is-fixed">9</sup>
+                
             
           </a>
         </li>
@@ -168,7 +179,9 @@
           <a class="menu-item-link" href="/works">
             
             
-              作品
+                
+                    作品<sup class="el-badge__content is-fixed">5</sup>
+                
             
           </a>
         </li>
@@ -177,7 +190,9 @@
           <a class="menu-item-link" href="/about">
             
             
-              关于
+                
+                    关于<sup class="el-badge__content is-fixed">new</sup>
+                
             
           </a>
         </li>
@@ -289,15 +304,15 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/04/17/window-name实现的跨域数据传输/">
+      <a class="prev" href="/2017/04/17/JQuery-ajax-jsonp跨域访问/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">window.name实现的跨域数据传输</span>
+        <span class="prev-text nav-default">JQuery+ajax+jsonp跨域访问</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
-      <a class="next" href="/2017/04/17/JQuery-ajax-jsonp跨域访问/">
-        <span class="next-text nav-default">JQuery+ajax+jsonp跨域访问</span>
+      <a class="next" href="/2017/04/17/window-name实现的跨域数据传输/">
+        <span class="next-text nav-default">window.name实现的跨域数据传输</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
@@ -375,6 +390,8 @@
   <span class="copyright-year">
     
     &copy; 
+     
+      2016 - 
     
     2017
 
